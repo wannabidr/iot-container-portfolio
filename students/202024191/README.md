@@ -164,7 +164,7 @@ oc get pods,svc,route,pvc -l app=portfolio-202024191
 
 | 평가 항목 | 배점 | 구현·검증 | 증빙 |
 |---|---:|---|---|
-| 배포 성공 | 40 | 실제 Sandbox Pod Ready, HTTPS 정상, 최종 Git YAML만으로 전체 재배포 | [검증 보고서](docs/VERIFICATION.md), [클러스터 상태](docs/cluster-status.txt), [재배포 기록](docs/redeploy-verification.json) |
+| 배포 성공 | 40 | 실제 Sandbox Pod Ready, HTTPS 정상, 최종 Git YAML만으로 전체 재배포 | [검증 보고서](docs/VERIFICATION.md), [클러스터 상태](docs/cluster-status.txt), [공개 clone 재배포](docs/public-clone-verification.json) |
 | 문서 | 25 | 서비스·선정 이유·구조·이미지·배포·결과·문제 해결·AI 활용 | 이 README, 아래 실제 화면 |
 | YAML 품질 | 20 | selector/포트 일치, 자원 제한, 이식 가능한 이름·설정, source 일치 검사 | [k8s/](k8s/), [YAML 해설](docs/YAML_GUIDE.md), [자동 테스트](tests/) |
 | 추가 구성 | 15 | ConfigMap 2개, Secret, PVC, startup/readiness/liveness Probe | [실서비스 24개 검증](docs/live-verification.json), [검증 보고서](docs/VERIFICATION.md) |

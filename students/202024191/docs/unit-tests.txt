@@ -98,6 +98,6 @@ test_packaged_application_is_complete_and_bounded (test_manifests.ManifestTests.
 test_resources_security_and_storage_strategy (test_manifests.ManifestTests.test_resources_security_and_storage_strategy) ... ok
 
 ----------------------------------------------------------------------
-Ran 20 tests in 8.798s
+Ran 20 tests in 8.782s
 
 OK

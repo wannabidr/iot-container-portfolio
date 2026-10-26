@@ -6,13 +6,14 @@
 
 | 검증 | 실제 결과 | 근거 |
 |---|---|---|
-| 로컬 자동 테스트 | 20개 통과, 8.798초 | [unit-tests.txt](unit-tests.txt), [테스트 원본](../tests/) |
+| 로컬 자동 테스트 | 20개 통과, 8.782초 | [unit-tests.txt](unit-tests.txt), [테스트 원본](../tests/) |
 | JavaScript 문법 | `app.js`, `admin.js` 모두 통과 | `node --check` 실행 |
 | YAML 사전 검증 | 서버 측 dry-run에서 Object 7개 허용 | `oc apply --dry-run=server -f k8s/` 실행 |
 | 실제 서비스 + Pod 교체 | 24개 점검 통과, 19:26:35–19:27:02 | [live-verification.json](live-verification.json) |
 | 전체 삭제·재배포 | 19:36:27–19:37:05 성공 | [redeploy-verification.json](redeploy-verification.json) |
 | 실제 DB 장애 상황 | Ready True → False → True, 재시작 0회 | [probe-verification.json](probe-verification.json) |
-| 재배포 이후 API 재검증 | 21개 점검 통과, 19:38:26–19:38:41 | [final-live-verification.json](final-live-verification.json) |
+| 공개 Git clone 전체 재배포 | 19:46:17–19:46:46 성공, 관리자 키 신규 생성 절차도 통과 | [public-clone-verification.json](public-clone-verification.json) |
+| 최종 재배포 이후 API 재검증 | 21개 점검 통과, 19:47:21–19:47:37 | [final-live-verification.json](final-live-verification.json) |
 | 최종 클러스터 | Deployment 1/1, Pod Running 1/1, PVC Bound, Service endpoint 존재 | [cluster-status.txt](cluster-status.txt) |
 
 24개와 21개는 일부가 겹치는 별도 실행 기록입니다. 서로 다른 45개 기능을 검증했다는 의미는 아닙니다.
@@ -22,7 +23,7 @@
 ![실제 OpenShift 토폴로지와 Running Pod](../images/08-openshift-topology.jpg)
 
 - Deployment `portfolio-202024191`: Ready 1/1.
-- Pod `portfolio-202024191-577d9d4cf6-666kb`: Running, Ready 1/1, 재시작 0.
+- Pod `portfolio-202024191-577d9d4cf6-lkjwv`: Running, Ready 1/1, 재시작 0.
 - Service `portfolio-202024191`: 8080/TCP, EndpointSlice에 준비된 Pod 주소 존재.
 - Route: `edge/Redirect`, HTTPS에서 포트폴리오·API 응답 정상.
 - PVC `portfolio-202024191-data`: Bound, 1Gi, RWO. 실제 클러스터가 기본 `gp3`를 선택했으며 제출 YAML에는 StorageClass를 고정하지 않았습니다.
@@ -62,14 +63,16 @@ Pod UID의 정확한 값은 [실행 JSON](live-verification.json)의 `replacemen
 
 ## `k8s/`만으로 완전히 재현되는지
 
-1. 최종 앱·YAML을 Git index에 올린 뒤 `git checkout-index`로 별도 임시 폴더에 추출했습니다.
+1. 당시 앱·YAML을 Git index에 올린 뒤 `git checkout-index`로 별도 임시 폴더에 추출했습니다.
 2. 그중 `k8s/`만 다른 격리 폴더로 복사했습니다. 실행 디렉터리에는 **`k8s` 하나만** 있었습니다.
 3. 방명록이 비어 있는 것을 먼저 확인하고, 이 과제 YAML의 Object 7개를 삭제했습니다.
 4. PVC 삭제 완료 후 해당 격리 폴더에서 `oc apply -f k8s/`와 rollout 확인을 실행했습니다.
 5. 새 PVC UID가 생기고 방명록이 빈 상태로 응답하는 것을 확인했습니다.
 6. 재배포에 사용한 YAML 7개의 SHA-256을 기록하고 제출본과 바이트 단위로 일치하는지 확인했습니다.
 
-이 검증은 관리자 원문 키·로컬 DB·앱 소스 폴더·생성 스크립트 없이 배포가 된다는 것을 확인합니다. [재배포 기록](redeploy-verification.json)의 `manifest_sha256`으로 제출 파일과 비교할 수 있습니다. 이후 변경은 증빙·설명 문서에 한정하며, 최종 공개 Git clone에서도 다시 적용해 확인합니다.
+이 검증은 관리자 원문 키·로컬 DB·앱 소스 폴더·생성 스크립트 없이 배포가 된다는 것을 확인합니다. 첫 실행은 [재배포 기록](redeploy-verification.json)에 남겼습니다. 이후 생성 YAML의 빈 줄 공백을 정리하고 GitHub에 게시한 뒤, 공개 저장소를 새로 clone하여 같은 전체 삭제·재배포 절차를 다시 통과했습니다.
+
+**최종 제출 YAML의 SHA-256은 [공개 clone 검증 기록](public-clone-verification.json)의 `manifest_sha256`입니다.** 배포한 소스 커밋은 `856383291a8b9157218a25c3c9b362b7a4fed0af`이며 이후 커밋은 검증 기록과 설명 문서만 갱신합니다. 공개 README의 인증 없는 다운로드도 확인했습니다. 새 clone에서 관리자 키 생성 도구를 실행해 해시 일치·Git 제외·YAML 재생성을 확인했으며, 이 검증용 새 키를 실제 배포에는 적용하지 않았습니다.
 
 ## DB 장애 시 Probe가 구분해서 동작하는지
 
@@ -95,6 +98,7 @@ readiness가 DB 쓰기 불가를 반영하고, 생존 중인 서버를 liveness�
 | 관리자 | 잘못된 키 오류, 올바른 키 인증, 글 개별 삭제, 관리 종료 확인 |
 | 삭제 확인창 | 초점이 취소 버튼으로 이동, Escape로 취소 가능 |
 | 키보드 진입 | 첫 Tab에서 본문 바로가기, Enter로 본문 이동 |
+| 모바일 메뉴 키보드 | Escape로 닫고 메뉴 버튼 초점 유지 |
 | 브라우저 콘솔 | 마지막 포트폴리오 확인 시 수집된 error 로그 없음 |
 
 실제 화면: [첫 화면](../images/01-desktop-home.jpg), [대표 프로젝트](../images/02-workway.jpg), [모바일](../images/03-mobile-home.jpg), [모바일 방명록](../images/04-mobile-guestbook.jpg), [작성 결과](../images/05-desktop-guestbook.jpg), [관리자](../images/06-admin-authenticated.jpg), [삭제 결과](../images/07-admin-delete.jpg).

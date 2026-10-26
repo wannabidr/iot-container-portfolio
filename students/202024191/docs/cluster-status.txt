@@ -1,38 +1,38 @@
-Captured at 2026-10-26T10:40:10.855421+00:00
+Captured at 2026-10-26T10:47:20.616215+00:00
 
 $ oc project -q
 sungwooki9-dev
 
 $ oc get deployment,replicaset,pod,service,route -l app=portfolio-202024191
 NAME                                  READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/portfolio-202024191   1/1     1            1           3m33s
+deployment.apps/portfolio-202024191   1/1     1            1           50s
 
 NAME                                             DESIRED   CURRENT   READY   AGE
-replicaset.apps/portfolio-202024191-577d9d4cf6   1         1         1       3m34s
+replicaset.apps/portfolio-202024191-577d9d4cf6   1         1         1       50s
 
 NAME                                       READY   STATUS    RESTARTS   AGE
-pod/portfolio-202024191-577d9d4cf6-666kb   1/1     Running   0          3m34s
+pod/portfolio-202024191-577d9d4cf6-lkjwv   1/1     Running   0          51s
 
-NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
-service/portfolio-202024191   ClusterIP   172.30.100.178   <none>        8080/TCP   3m31s
+NAME                          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/portfolio-202024191   ClusterIP   172.30.234.21   <none>        8080/TCP   48s
 
 NAME                                           HOST/PORT                                                               PATH   SERVICES              PORT   TERMINATION     WILDCARD
 route.route.openshift.io/portfolio-202024191   portfolio-202024191-sungwooki9-dev.apps.rm1.0a51.p1.openshiftapps.com          portfolio-202024191   http   edge/Redirect   None
 
 $ oc get configmap,secret,pvc -l app=portfolio-202024191
 NAME                                     DATA   AGE
-configmap/portfolio-202024191-app        7      3m37s
-configmap/portfolio-202024191-settings   3      3m36s
+configmap/portfolio-202024191-app        7      54s
+configmap/portfolio-202024191-settings   3      53s
 
 NAME                               TYPE     DATA   AGE
-secret/portfolio-202024191-admin   Opaque   1      3m34s
+secret/portfolio-202024191-admin   Opaque   1      51s
 
 NAME                                             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-persistentvolumeclaim/portfolio-202024191-data   Bound    pvc-a6ef5c53-6c96-4ba6-a807-150a5074a12b   1Gi        RWO            gp3            <unset>                 3m35s
+persistentvolumeclaim/portfolio-202024191-data   Bound    pvc-ced2b604-ecdb-4a43-9197-625900a84f7d   1Gi        RWO            gp3            <unset>                 53s
 
 $ oc get endpointslice -l kubernetes.io/service-name=portfolio-202024191
-NAME                        ADDRESSTYPE   PORTS   ENDPOINTS      AGE
-portfolio-202024191-fw7f9   IPv4          8080    10.129.27.99   3m35s
+NAME                        ADDRESSTYPE   PORTS   ENDPOINTS       AGE
+portfolio-202024191-4bpjq   IPv4          8080    10.129.27.103   51s
 
 $ oc exec deployment/portfolio-202024191 -- id
 uid=1010470000(1010470000) gid=0(root) groups=0(root),1010470000
@@ -44,23 +44,21 @@ $ oc get pod -l app=portfolio-202024191 -o jsonpath={.items[0].metadata.annotati
 restricted-v2
 
 $ oc logs deployment/portfolio-202024191 --tail=20
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "GET", "path": "/api/guestbook", "status": "200"}
+{"method": "DELETE", "path": "/api/guestbook/1", "status": "401"}
 {"method": "GET", "path": "/readyz", "status": "200"}
-{"method": "GET", "path": "/readyz", "status": "200"}
-{"method": "GET", "path": "/healthz", "status": "200"}
-{"method": "GET", "path": "/readyz", "status": "200"}
-{"method": "GET", "path": "/readyz", "status": "200"}
-{"method": "GET", "path": "/healthz", "status": "200"}
-{"method": "GET", "path": "/readyz", "status": "200"}
-{"method": "GET", "path": "/readyz", "status": "200"}
-{"method": "GET", "path": "/healthz", "status": "200"}
-{"method": "GET", "path": "/readyz", "status": "200"}
-{"method": "GET", "path": "/readyz", "status": "200"}
-{"method": "GET", "path": "/healthz", "status": "200"}
-{"method": "GET", "path": "/readyz", "status": "200"}
-{"method": "GET", "path": "/readyz", "status": "200"}
-{"method": "GET", "path": "/healthz", "status": "200"}
-{"method": "GET", "path": "/readyz", "status": "200"}
-{"method": "GET", "path": "/readyz", "status": "200"}
-{"method": "GET", "path": "/healthz", "status": "200"}
-{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "DELETE", "path": "/api/guestbook/1", "status": "401"}
+{"method": "GET", "path": "/server.py", "status": "404"}
+{"method": "GET", "path": "/config.json", "status": "404"}
+{"method": "GET", "path": "/", "status": "200"}
+{"method": "GET", "path": "/data/guestbook.sqlite3", "status": "404"}
+{"method": "GET", "path": "/app.js", "status": "200"}
+{"method": "GET", "path": "/styles.css", "status": "200"}
+{"method": "GET", "path": "/favicon.svg", "status": "200"}
+{"method": "GET", "path": "/.local/admin-key.txt", "status": "404"}
+{"method": "GET", "path": "/api/config", "status": "200"}
+{"method": "GET", "path": "/api/guestbook", "status": "200"}
+{"method": "DELETE", "path": "/api/guestbook/1", "status": "204"}
+{"method": "GET", "path": "/api/guestbook", "status": "200"}
 {"method": "GET", "path": "/readyz", "status": "200"}
