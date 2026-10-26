@@ -1,0 +1,17 @@
+Warning: apps.openshift.io/v1 DeploymentConfig is deprecated in v4.14+, unavailable in v4.10000+
+Warning: kubevirt.io/v1 VirtualMachineInstancePresets is now deprecated and will be removed in v2.
+NAME                                       READY   STATUS    RESTARTS   AGE
+pod/portfolio-202024191-577d9d4cf6-666kb   1/1     Running   0          4m56s
+
+NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/portfolio-202024191   ClusterIP   172.30.100.178   <none>        8080/TCP   4m53s
+
+NAME                                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/portfolio-202024191   1/1     1            1           4m57s
+
+NAME                                             DESIRED   CURRENT   READY   AGE
+replicaset.apps/portfolio-202024191-577d9d4cf6   1         1         1       4m57s
+
+NAME                                           HOST/PORT                                                               PATH   SERVICES              PORT   TERMINATION     WILDCARD
+route.route.openshift.io/portfolio-202024191   portfolio-202024191-sungwooki9-dev.apps.rm1.0a51.p1.openshiftapps.com          portfolio-202024191   http   edge/Redirect   None
+Error from server (Forbidden): applications.app.k8s.io is forbidden: User "sungwooki9" cannot list resource "applications" in API group "app.k8s.io" in the namespace "sungwooki9-dev"

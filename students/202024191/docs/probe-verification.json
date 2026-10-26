@@ -1,0 +1,16 @@
+{
+  "started_at": "2026-10-26T10:37:31.422068+00:00",
+  "pod_uid": "82e43dcd-0211-4c7e-9bba-15e538926591",
+  "initial_ready": "True",
+  "initial_restart_count": 0,
+  "method": "hold a SQLite write transaction for 35 seconds, then rollback; no files deleted",
+  "during_lock_http": {
+    "/healthz": 200,
+    "/readyz": 503
+  },
+  "during_lock_ready": "False",
+  "recovered_ready": "True",
+  "final_restart_count": 0,
+  "completed_at": "2026-10-26T10:38:13.232981+00:00",
+  "result": "PASS"
+}

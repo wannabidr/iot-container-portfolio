@@ -1,0 +1,103 @@
+test_admin_requires_correct_key_and_deletion_is_persistent (test_app.AppTests.test_admin_requires_correct_key_and_deletion_is_persistent) ... {"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "DELETE", "path": "/api/guestbook/1", "status": "401"}
+{"method": "DELETE", "path": "/api/guestbook/1", "status": "401"}
+{"method": "GET", "path": "/api/admin/check", "status": "200"}
+{"method": "DELETE", "path": "/api/guestbook/1", "status": "204"}
+{"method": "DELETE", "path": "/api/guestbook/1", "status": "404"}
+{"method": "GET", "path": "/api/guestbook", "status": "200"}
+ok
+test_concurrent_writes_do_not_lose_entries (test_app.AppTests.test_concurrent_writes_do_not_lose_entries) ... {"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "GET", "path": "/api/guestbook", "status": "200"}
+ok
+test_cross_origin_writes_are_rejected (test_app.AppTests.test_cross_origin_writes_are_rejected) ... {"method": "POST", "path": "/api/guestbook", "status": "403"}
+{"method": "POST", "path": "/api/guestbook", "status": "403"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+ok
+test_head_and_public_configuration (test_app.AppTests.test_head_and_public_configuration) ... {"method": "HEAD", "path": "/", "status": "200"}
+{"method": "GET", "path": "/api/config", "status": "200"}
+{"method": "GET", "path": "/api/config", "status": "200"}
+ok
+test_invalid_fields_and_lengths (test_app.AppTests.test_invalid_fields_and_lengths) ... {"method": "POST", "path": "/api/guestbook", "status": "400"}
+{"method": "POST", "path": "/api/guestbook", "status": "400"}
+{"method": "POST", "path": "/api/guestbook", "status": "400"}
+{"method": "POST", "path": "/api/guestbook", "status": "400"}
+{"method": "POST", "path": "/api/guestbook", "status": "400"}
+{"method": "POST", "path": "/api/guestbook", "status": "400"}
+{"method": "POST", "path": "/api/guestbook", "status": "400"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+ok
+test_malformed_and_oversized_requests (test_app.AppTests.test_malformed_and_oversized_requests) ... {"method": "POST", "path": "/api/guestbook", "status": "400"}
+{"method": "POST", "path": "/api/guestbook", "status": "413"}
+{"method": "POST", "path": "/api/guestbook", "status": "415"}
+{"method": "PUT", "path": "/api/guestbook", "status": "405"}
+ok
+test_missing_secret_fails_closed (test_app.AppTests.test_missing_secret_fails_closed) ... {"method": "GET", "path": "/api/admin/check", "status": "503"}
+ok
+test_pagination_has_no_duplicates (test_app.AppTests.test_pagination_has_no_duplicates) ... {"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "GET", "path": "/api/guestbook", "status": "200"}
+{"method": "GET", "path": "/api/guestbook", "status": "200"}
+{"method": "GET", "path": "/api/guestbook", "status": "400"}
+{"method": "GET", "path": "/api/guestbook", "status": "400"}
+{"method": "GET", "path": "/api/guestbook", "status": "400"}
+{"method": "GET", "path": "/api/guestbook", "status": "400"}
+{"method": "GET", "path": "/api/guestbook", "status": "400"}
+ok
+test_portfolio_contains_approved_career_and_projects (test_app.AppTests.test_portfolio_contains_approved_career_and_projects) ... {"method": "GET", "path": "/", "status": "200"}
+ok
+test_rate_limits_and_capacity_are_explicit (test_app.AppTests.test_rate_limits_and_capacity_are_explicit) ... {"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "POST", "path": "/api/guestbook", "status": "429"}
+{"method": "POST", "path": "/api/guestbook", "status": "409"}
+ok
+test_readiness_failure_does_not_fail_liveness (test_app.AppTests.test_readiness_failure_does_not_fail_liveness) ... {"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "503"}
+{"method": "GET", "path": "/healthz", "status": "200"}
+{"method": "GET", "path": "/api/guestbook", "status": "200"}
+ok
+test_restart_retains_messages (test_app.AppTests.test_restart_retains_messages) ... {"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "GET", "path": "/api/guestbook", "status": "200"}
+ok
+test_round_trip_unicode_and_timestamp (test_app.AppTests.test_round_trip_unicode_and_timestamp) ... {"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "GET", "path": "/api/guestbook", "status": "200"}
+ok
+test_sql_and_script_strings_remain_literal_data (test_app.AppTests.test_sql_and_script_strings_remain_literal_data) ... {"method": "POST", "path": "/api/guestbook", "status": "201"}
+{"method": "GET", "path": "/api/guestbook", "status": "200"}
+{"method": "POST", "path": "/api/guestbook", "status": "201"}
+ok
+test_static_allowlist_blocks_source_secrets_and_traversal (test_app.AppTests.test_static_allowlist_blocks_source_secrets_and_traversal) ... {"method": "GET", "path": "/server.py", "status": "404"}
+{"method": "GET", "path": "/config.json", "status": "404"}
+{"method": "GET", "path": "/.env", "status": "404"}
+{"method": "GET", "path": "/data/guestbook.sqlite3", "status": "404"}
+{"method": "GET", "path": "/../server.py", "status": "404"}
+{"method": "GET", "path": "/%2e%2e/server.py", "status": "404"}
+{"method": "GET", "path": "/run/portfolio-admin/key-sha256", "status": "404"}
+{"method": "GET", "path": "/static/", "status": "404"}
+ok
+test_all_references_and_ports_are_consistent (test_manifests.ManifestTests.test_all_references_and_ports_are_consistent) ... ok
+test_checked_in_yaml_matches_source (test_manifests.ManifestTests.test_checked_in_yaml_matches_source) ... ok
+test_no_environment_bound_or_generated_fields (test_manifests.ManifestTests.test_no_environment_bound_or_generated_fields) ... ok
+test_packaged_application_is_complete_and_bounded (test_manifests.ManifestTests.test_packaged_application_is_complete_and_bounded) ... ok
+test_resources_security_and_storage_strategy (test_manifests.ManifestTests.test_resources_security_and_storage_strategy) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 8.798s
+
+OK

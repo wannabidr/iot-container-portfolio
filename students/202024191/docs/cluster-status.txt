@@ -1,0 +1,66 @@
+Captured at 2026-10-26T10:40:10.855421+00:00
+
+$ oc project -q
+sungwooki9-dev
+
+$ oc get deployment,replicaset,pod,service,route -l app=portfolio-202024191
+NAME                                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/portfolio-202024191   1/1     1            1           3m33s
+
+NAME                                             DESIRED   CURRENT   READY   AGE
+replicaset.apps/portfolio-202024191-577d9d4cf6   1         1         1       3m34s
+
+NAME                                       READY   STATUS    RESTARTS   AGE
+pod/portfolio-202024191-577d9d4cf6-666kb   1/1     Running   0          3m34s
+
+NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/portfolio-202024191   ClusterIP   172.30.100.178   <none>        8080/TCP   3m31s
+
+NAME                                           HOST/PORT                                                               PATH   SERVICES              PORT   TERMINATION     WILDCARD
+route.route.openshift.io/portfolio-202024191   portfolio-202024191-sungwooki9-dev.apps.rm1.0a51.p1.openshiftapps.com          portfolio-202024191   http   edge/Redirect   None
+
+$ oc get configmap,secret,pvc -l app=portfolio-202024191
+NAME                                     DATA   AGE
+configmap/portfolio-202024191-app        7      3m37s
+configmap/portfolio-202024191-settings   3      3m36s
+
+NAME                               TYPE     DATA   AGE
+secret/portfolio-202024191-admin   Opaque   1      3m34s
+
+NAME                                             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/portfolio-202024191-data   Bound    pvc-a6ef5c53-6c96-4ba6-a807-150a5074a12b   1Gi        RWO            gp3            <unset>                 3m35s
+
+$ oc get endpointslice -l kubernetes.io/service-name=portfolio-202024191
+NAME                        ADDRESSTYPE   PORTS   ENDPOINTS      AGE
+portfolio-202024191-fw7f9   IPv4          8080    10.129.27.99   3m35s
+
+$ oc exec deployment/portfolio-202024191 -- id
+uid=1010470000(1010470000) gid=0(root) groups=0(root),1010470000
+
+$ oc exec deployment/portfolio-202024191 -- python3 --version
+Python 3.12.15
+
+$ oc get pod -l app=portfolio-202024191 -o jsonpath={.items[0].metadata.annotations.openshift\.io/scc}
+restricted-v2
+
+$ oc logs deployment/portfolio-202024191 --tail=20
+{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/healthz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/healthz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/healthz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/healthz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/healthz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/healthz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "200"}
+{"method": "GET", "path": "/readyz", "status": "200"}

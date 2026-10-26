@@ -1,0 +1,56 @@
+{
+  "started_at": "2026-10-26T10:36:27.636568+00:00",
+  "method": "isolated export of Git index; only k8s copied to deployment directory",
+  "steps": [
+    {
+      "command": "oc get route portfolio-202024191 -o jsonpath={.spec.host}",
+      "output": "portfolio-202024191-sungwooki9-dev.apps.rm1.0a51.p1.openshiftapps.com"
+    },
+    {
+      "command": "oc get pvc portfolio-202024191-data -o jsonpath={.metadata.uid}",
+      "output": "73e8de01-e856-4166-a5a3-fc3969bd900b"
+    },
+    {
+      "command": "oc delete -f k8s/ --wait=true --timeout=180s",
+      "output": "configmap \"portfolio-202024191-app\" deleted from sungwooki9-dev namespace\nconfigmap \"portfolio-202024191-settings\" deleted from sungwooki9-dev namespace\ndeployment.apps \"portfolio-202024191\" deleted from sungwooki9-dev namespace\npersistentvolumeclaim \"portfolio-202024191-data\" deleted from sungwooki9-dev namespace\nroute.route.openshift.io \"portfolio-202024191\" deleted from sungwooki9-dev namespace\nsecret \"portfolio-202024191-admin\" deleted from sungwooki9-dev namespace\nservice \"portfolio-202024191\" deleted from sungwooki9-dev namespace"
+    },
+    {
+      "command": "oc apply -f k8s/",
+      "output": "configmap/portfolio-202024191-app created\nconfigmap/portfolio-202024191-settings created\ndeployment.apps/portfolio-202024191 created\npersistentvolumeclaim/portfolio-202024191-data created\nroute.route.openshift.io/portfolio-202024191 created\nsecret/portfolio-202024191-admin created\nservice/portfolio-202024191 created"
+    },
+    {
+      "command": "oc rollout status deployment/portfolio-202024191 --timeout=180s",
+      "output": "Waiting for deployment \"portfolio-202024191\" rollout to finish: 0 of 1 updated replicas are available...\ndeployment \"portfolio-202024191\" successfully rolled out"
+    },
+    {
+      "command": "oc get pvc portfolio-202024191-data -o jsonpath={.metadata.uid}",
+      "output": "a6ef5c53-6c96-4ba6-a807-150a5074a12b"
+    },
+    {
+      "command": "oc get route portfolio-202024191 -o jsonpath={.spec.host}",
+      "output": "portfolio-202024191-sungwooki9-dev.apps.rm1.0a51.p1.openshiftapps.com"
+    },
+    {
+      "command": "oc project -q",
+      "output": "sungwooki9-dev"
+    }
+  ],
+  "manifest_sha256": {
+    "configmap-app.yaml": "7f62d0616ebeeed8660eabdf710b4b2e2a47e760c0a43dc88ea513dd3c893f68",
+    "configmap-settings.yaml": "bf7a054747a57c8228dea6b5f7fbd6d51114d2a57d2976fb5f297ee8b90a1085",
+    "deployment.yaml": "42ff39caada325875f58ad6d5fcc53b997bcc57bc0ec0eb3e21cc198ade93cdc",
+    "pvc.yaml": "c925f5340151a6e1fa24c4bc56e8e83ca8969cebaadea2fcabfd65e8ebd074aa",
+    "route.yaml": "221aa07e4bfcc335762d4a8b2a908bbed85575fc831531b3115a4b0a291571b3",
+    "secret.yaml": "6112816a8765fe76bffba3341055e965d4c5efa37af5cf2224feb98e83ec1c35",
+    "service.yaml": "7b459333717f071282a575f8170ddb5d09363422d015f362aeeaa51267cccd3f"
+  },
+  "isolated_directory_entries": [
+    "k8s"
+  ],
+  "old_pvc_uid": "73e8de01-e856-4166-a5a3-fc3969bd900b",
+  "new_pvc_uid": "a6ef5c53-6c96-4ba6-a807-150a5074a12b",
+  "fresh_database_empty": true,
+  "project": "sungwooki9-dev",
+  "result": "PASS",
+  "completed_at": "2026-10-26T10:37:05.681606+00:00"
+}

@@ -1,0 +1,93 @@
+{
+  "started_at": "2026-10-26T10:38:26.850786+00:00",
+  "url": "https://portfolio-202024191-sungwooki9-dev.apps.rm1.0a51.p1.openshiftapps.com",
+  "project": "sungwooki9-dev",
+  "checks": [
+    {
+      "name": "HTTPS /",
+      "result": "PASS"
+    },
+    {
+      "name": "HTTPS /admin",
+      "result": "PASS"
+    },
+    {
+      "name": "HTTPS /healthz",
+      "result": "PASS"
+    },
+    {
+      "name": "HTTPS /readyz",
+      "result": "PASS"
+    },
+    {
+      "name": "HTTPS /api/config",
+      "result": "PASS"
+    },
+    {
+      "name": "empty input rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "long input rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "cross-origin rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "wrong key rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "correct key accepted",
+      "result": "PASS"
+    },
+    {
+      "name": "create guestbook entry",
+      "result": "PASS"
+    },
+    {
+      "name": "script and SQL punctuation preserved literally",
+      "result": "PASS"
+    },
+    {
+      "name": "unauthenticated deletion rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "wrong-key deletion rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "private path blocked /server.py",
+      "result": "PASS"
+    },
+    {
+      "name": "private path blocked /config.json",
+      "result": "PASS"
+    },
+    {
+      "name": "private path blocked /data/guestbook.sqlite3",
+      "result": "PASS"
+    },
+    {
+      "name": "private path blocked /.local/admin-key.txt",
+      "result": "PASS"
+    },
+    {
+      "name": "authenticated deletion",
+      "result": "PASS"
+    },
+    {
+      "name": "deleted entry absent",
+      "result": "PASS"
+    },
+    {
+      "name": "deleting absent entry returns 404",
+      "result": "PASS"
+    }
+  ],
+  "completed_at": "2026-10-26T10:38:41.627004+00:00",
+  "result": "PASS"
+}
