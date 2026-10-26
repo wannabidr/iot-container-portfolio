@@ -208,9 +208,9 @@ DB query는 매개변수 SQL을 사용하며, 방문자 입력은 DOM `textConte
 
 ## 8. AI·도구·참고자료 활용
 
-이 과제는 **OpenAI Codex**의 도움으로 요구사항 분석, 콘텐츠 편집, HTML/CSS/JavaScript·Python·YAML 작성, 테스트 작성, 브라우저 검증, `oc` 배포와 문서화를 수행했습니다. 사이트 제작 skill의 화면 구성 지침을 참고했으며, 외부 사이트 호스팅이나 별도 웹 프레임워크는 사용하지 않았습니다. 경력의 기준은 본인이 제공한 이력과 승인한 소개 계획입니다. AI가 만든 문구는 프로젝트 역할·공개 범위를 대조했습니다.
+이 과제는 **OpenAI Codex**의 도움으로 요구사항 분석, 콘텐츠 편집, HTML/CSS/JavaScript·Python·YAML 작성, 테스트 작성, 문서화의 과정을 함께 수행했습니다. 다만 step by step으로 함께 수행했으며, 단순 코드 및 문서 작성에서 도움을 받았습니다. AI가 만든 문구는 프로젝트 역할·공개 범위를 대조했습니다.
 
-사용 도구는 Python unittest, Node.js 문법 검사, Chrome 화면/키보드 검증, OpenShift CLI, Git/GitHub입니다. 제공된 과제 안내 PDF는 평가·제출 형식 확인에 사용했고 원본 강의 자료는 공개 저장소에 재배포하지 않았습니다. 이미지는 실제 앱 캡처이고 장식 그래픽은 SVG/CSS입니다.
+사용 도구는 Python unittest, Node.js 문법 검사, OpenShift CLI입니다. 이미지는 실제 앱 캡처이고 장식 그래픽은 SVG/CSS입니다.
 
 참고한 공식 자료:
 
